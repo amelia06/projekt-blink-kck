@@ -105,8 +105,8 @@ if __name__ == "__main__":
           "cyan":(0,255,255), "purple":(150,0,150), "pink":(238,130,238), "brown":(139,69,19), "lightbrown":(222,184,135),"lightgreen":(144,238,144),
           "turquoise":(64,224,208),"beige":(245,245,220),"honeydew":(240,255,240),"lavender":(230,230,250),"crimson":(220,20,60)}
 
-    images = {0:pygame.image.load("imgs/empty.png"), 1:pygame.image.load("imgs/v1.png"), 2:pygame.image.load("imgs/v2.png"),
-      3:pygame.image.load("imgs/v3.png"),4:pygame.image.load("imgs/v4.png"),5:pygame.image.load("imgs/v5.png"),6:pygame.image.load("imgs/v6.png")}
+    images = {0:pygame.image.load("empty.png"), 1:pygame.image.load("v1.png"), 2:pygame.image.load("v2.png"),
+      3:pygame.image.load("v3.png"),4:pygame.image.load("v4.png"),5:pygame.image.load("v5.png"),6:pygame.image.load("v6.png")}
 
     alphabet = list(string.ascii_uppercase) # Getting all the letters in the latin alphabet
 
