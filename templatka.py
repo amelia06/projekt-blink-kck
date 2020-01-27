@@ -252,6 +252,7 @@ if __name__ == "__main__":
         text = font.render(alphabet[counter], True, (0, 128, 0))
         screen.blit(text,
             (100 - text.get_width() // 2, 100 - text.get_height() // 2))
+        screen.blit(images[errorCount], (sc[0]-images[errorCount].get_rect().width/2, sc[1]-images[errorCount].get_rect().height/2+70))
     # ^^ THE HANGMAN PICTURES
 
         for letter in letters:              # DRAWING
