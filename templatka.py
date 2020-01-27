@@ -9,8 +9,9 @@ import pygame as pg
 import pandas as pd
 import filterlib as flt
 import blink as blk
+'''
 from pyOpenBCI import OpenBCIGanglion
-
+'''
 pygame.init()
 
 
@@ -53,7 +54,7 @@ def blinks_detector(quit_program, blink_det, blinks_num, blink,):
     brt = blk.BlinkRealTime()
 
     if SYMULACJA_SYGNALU:
-        df = pd.read_csv('data.csv')
+        df = pd.read_csv('dane_do_symulacji/data.csv')
         for sample in df['signal']:
             if quit_program.is_set():
                 break
@@ -104,16 +105,11 @@ if __name__ == "__main__":
           "cyan":(0,255,255), "purple":(150,0,150), "pink":(238,130,238), "brown":(139,69,19), "lightbrown":(222,184,135),"lightgreen":(144,238,144),
           "turquoise":(64,224,208),"beige":(245,245,220),"honeydew":(240,255,240),"lavender":(230,230,250),"crimson":(220,20,60)}
 
-# Loading images to a dictionary
-    images = {"logo":pygame.image.load("imgs/logo.png"),0:pygame.image.load("imgs/empty.png"), 1:pygame.image.load("imgs/v1.png"), 2:pygame.image.load("imgs/v2.png"),
-          3:pygame.image.load("imgs/v3.png"),4:pygame.image.load("imgs/v4.png"),5:pygame.image.load("imgs/v5.png"),6:pygame.image.load("imgs/v6.png")}
-# Loading sounds to a dicion
+    images = {0:pygame.image.load("imgs/empty.png"), 1:pygame.image.load("imgs/v1.png"), 2:pygame.image.load("imgs/v2.png"),
+      3:pygame.image.load("imgs/v3.png"),4:pygame.image.load("imgs/v4.png"),5:pygame.image.load("imgs/v5.png"),6:pygame.image.load("imgs/v6.png")}
 
     alphabet = list(string.ascii_uppercase) # Getting all the letters in the latin alphabet
-'''
 
-alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
-'''
     class Button(object): # A GENERAL CLASS FOR ALL THE BUTTONS ON THE SCREEN (LETTERS & LANGUAGE BUTTONS)
         def __init__(self, color, pos, width, height, letter, active = False, type = 1, size = 40):
             self.type = type #TYPE 1 IS A LETTER, TYPE 2 IS A LANGUAGE BUTTON
@@ -206,8 +202,8 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
             spaceCount += 1
     print(len(wordsEN))
 #print(len(wordsTR))
-
-    while True:
+    running = True
+    while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -223,7 +219,7 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
                 if event.button == 1: # LEFT MOUSE BUTTON / LEFT CLICK
                     for button in letters:
                         if button.rollOver == True and button.clicked == False: # IF YOU ARE ON THE BUTTON AND IF
-#                        sounds["click"].play()                              # THE BUTTON ISN'T CLICKED STILL,
+                                                                                # THE BUTTON ISN'T CLICKED STILL,
                             button.clicked = True                               # ONLY THEN IT'S CLICKABLE.
                             guessed.append(button.letter)
                             noError = False
@@ -235,21 +231,18 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
 
 
         if blink.value == 1:
-            '''
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: #działanie spacji; wybór literki
-'''
-                slowo+=alphabet[counter - 1]
-                print(slowo)
-                for slowo in slowo:
-                    guessed.append(slowo)
-                    noError = False
-                    for letter in currentLanguage[currentWord]:
-                        if slowo == letter:
-                            noError = True
-                    if errorCount < 6 and not noError: # IF THAT LETTER ISN'T IN THE WORD, IF NOERROR == FALSE,
-                        errorCount += 1                # UP THE ERROR COUNT BY ONE
-                        slowo = list(slowo)
-                        slowo.remove(slowo[0])
+            slowo+=alphabet[counter - 1]
+            print(slowo)
+            for slowo in slowo:
+                guessed.append(slowo)
+                noError = False
+                for letter in currentLanguage[currentWord]:
+                    if slowo == letter:
+                        noError = True
+                if errorCount < 6 and not noError: # IF THAT LETTER ISN'T IN THE WORD, IF NOERROR == FALSE,
+                    errorCount += 1                # UP THE ERROR COUNT BY ONE
+                    slowo = list(slowo)
+                    slowo.remove(slowo[0])
             blink.value=0
 
         screen.fill(colors["white"])        # BG COLOR THAT WE WON'T SEE
@@ -259,7 +252,6 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
         text = font.render(alphabet[counter], True, (0, 128, 0))
         screen.blit(text,
             (100 - text.get_width() // 2, 100 - text.get_height() // 2))
-        screen.blit(images[errorCount], (sc[0]-images[errorCount].get_rect().width/2, sc[1]-images[errorCount].get_rect().height/2+70))
     # ^^ THE HANGMAN PICTURES
 
         for letter in letters:              # DRAWING
@@ -296,7 +288,6 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
 
         if errorCount >= 6 or needRestart:  # IF A RESTART CONDITION IS MET
             if not needRestart:    # But if that condition is not by changing languages: lose.
-#            sounds["lose"].play()
                 screen.blit(lose_text, (500,380))
                 pygame.display.update()
                 pygame.time.wait(1000)
@@ -340,33 +331,33 @@ alphabet='AIOEZNRWSTCYKDPMUJLBGHX'
         if counter == len(alphabet):
             counter = 0
 
-'''
-    win = visual.Window([400,400])
-    message = visual.TextStim(win, text='init')
+    '''
+        win = visual.Window([400,400])
+        message = visual.TextStim(win, text='init')
 
 
-    message.autoDraw = True
-    win.flip()
-    core.wait(2.0)
+        message.autoDraw = True
+        win.flip()
+        core.wait(2.0)
 
-    cnt_blinks = 0
+        cnt_blinks = 0
+        '''
+    '''
+        while True:
+
+            print('BLINK!')
+            blink.value = 0
+
+                cnt_blinks +=1
+                message.setText(str(cnt_blinks))
+
+            win.flip()
+            if 'escape' in event.getKeys():
+                print('quitting')
+                quit_program.set()
+                if quit_program.is_set():
+                    break
     '''
 
-while True:
-
-        print('BLINK!')
-        blink.value = 0
-            '''
-            cnt_blinks +=1
-            message.setText(str(cnt_blinks))
-            '''
-        win.flip()
-    if 'escape' in event.getKeys():
-        print('quitting')
-        quit_program.set()
-    if quit_program.is_set():
-        break
-
-
-# Zakończenie podprocesów
+    # Zakończenie podprocesów
     proc_blink_det.join()
